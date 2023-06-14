@@ -13,13 +13,14 @@ import streamlit as st
 
 pdf_files = st.file_uploader("Upload pdf files", type=["pdf"],
                                accept_multiple_files=False)
+OPENAI_API_KEY = st.text_input("API Key:")
 if pdf_files is not None:
   pdf_reader = PdfReader(pdf_files)
   text = ""
   for page in pdf_reader.pages:
     text += page.extract_text()
 
-  OPENAI_API_KEY = st.text_input("API Key:")
+  
 
   # split into chunks
   text_splitter = CharacterTextSplitter(
