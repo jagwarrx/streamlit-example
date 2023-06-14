@@ -11,9 +11,10 @@ from langchain.callbacks import get_openai_callback
 from langchain.prompts import PromptTemplate
 import streamlit as st
 
+OPENAI_API_KEY = st.text_input("API Key:")
 pdf_files = st.file_uploader("Upload pdf files", type=["pdf"],
                                accept_multiple_files=False)
-OPENAI_API_KEY = st.text_input("API Key:")
+
 if pdf_files is not None:
   pdf_reader = PdfReader(pdf_files)
   text = ""
