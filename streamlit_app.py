@@ -45,7 +45,7 @@ if pdf_files is not None:
       template=prompt_template, input_variables=["context","question"]
   )
 
-  user_question = "Is this agreement one-sided indemnification or two-sided indemnification? Provide instances of example caluses."
+  user_question = "Is this agreement one-sided indemnification or two-sided indemnification? Provide instances of example clauses with the clause numbers where applicable."
 
   # create embeddings
   embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
