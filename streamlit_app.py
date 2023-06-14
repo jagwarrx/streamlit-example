@@ -34,9 +34,9 @@ if pdf_files is not None:
 
   prompt_template = """
 
-  One sided agreements are where the Supplier shall bear full responsibility for indemnifying the Customer against any losses or damages caused by the Supplier's unauthorized use, disclosure, or misappropriation of the Customer's confidential information. 
+  One sided indemnification agreements are where the Supplier shall bear full responsibility for indemnifying the Customer against any losses or damages caused by the Supplier's unauthorized use, disclosure, or misappropriation of the Customer's confidential information. 
 
-  Two sided agreements are where the Customer and Supplier mutually agree to indemnify and defend each other against any claims, damages, liabilities, losses, costs, and expenses arising out of third-party intellectual property infringement claims related to their respective products, services, or deliverables provided under this Agreement.
+  Two sided indemnification agreements are where the Customer and Supplier mutually agree to indemnify and defend each other against any claims, damages, liabilities, losses, costs, and expenses arising out of third-party intellectual property infringement claims related to their respective products, services, or deliverables provided under this Agreement.
 
   {context}
   Question: {question}
@@ -45,7 +45,7 @@ if pdf_files is not None:
       template=prompt_template, input_variables=["context","question"]
   )
 
-  user_question = "Is this agreement one-sided indemnification or two-sided indemnification? Provide instances of example clauses with the clause numbers where applicable."
+  user_question = "Is this agreement one-sided indemnification or two-sided indemnification? Provide examples of clauses from the above to support your answer."
 
   # create embeddings
   embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
