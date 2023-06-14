@@ -19,43 +19,43 @@ if pdf_files is not None:
   for page in pdf_reader.pages:
     text += page.extract_text()
 
-OPENAI_API_KEY = st.text_input("API Key:")
+  OPENAI_API_KEY = st.text_input("API Key:")
 
-# split into chunks
-text_splitter = CharacterTextSplitter(
-  separator="\n",
-  chunk_size=1000,
-  chunk_overlap=200,
-  length_function=len
-)
-chunks = text_splitter.split_text(text)
+  # split into chunks
+  text_splitter = CharacterTextSplitter(
+    separator="\n",
+    chunk_size=1000,
+    chunk_overlap=200,
+    length_function=len
+  )
+  chunks = text_splitter.split_text(text)
 
-prompt_template = """
+  prompt_template = """
 
-One sided agreements are where the Supplier shall bear full responsibility for indemnifying the Customer against any losses or damages caused by the Supplier's unauthorized use, disclosure, or misappropriation of the Customer's confidential information. 
+  One sided agreements are where the Supplier shall bear full responsibility for indemnifying the Customer against any losses or damages caused by the Supplier's unauthorized use, disclosure, or misappropriation of the Customer's confidential information. 
 
-Two sided agreements are where the Customer and Supplier mutually agree to indemnify and defend each other against any claims, damages, liabilities, losses, costs, and expenses arising out of third-party intellectual property infringement claims related to their respective products, services, or deliverables provided under this Agreement.
+  Two sided agreements are where the Customer and Supplier mutually agree to indemnify and defend each other against any claims, damages, liabilities, losses, costs, and expenses arising out of third-party intellectual property infringement claims related to their respective products, services, or deliverables provided under this Agreement.
 
-{context}
-Question: {question}
-Answer:"""
-PROMPT = PromptTemplate(
-    template=prompt_template, input_variables=["context","question"]
-)
+  {context}
+  Question: {question}
+  Answer:"""
+  PROMPT = PromptTemplate(
+      template=prompt_template, input_variables=["context","question"]
+  )
 
-user_question = "Is this agreement one-sided indemnification or two-sided indemnification? Provide instances of example caluses."
+  user_question = "Is this agreement one-sided indemnification or two-sided indemnification? Provide instances of example caluses."
 
-# create embeddings
-embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
-knowledge_base = FAISS.from_texts(chunks, embeddings)
+  # create embeddings
+  embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
+  knowledge_base = FAISS.from_texts(chunks, embeddings)
 
-# show user input
-if user_question:
-  docs = knowledge_base.similarity_search(user_question)
+  # show user input
+  if user_question:
+    docs = knowledge_base.similarity_search(user_question)
 
-llm = OpenAI(openai_api_key=OPENAI_API_KEY)
-chain = load_qa_chain(llm, chain_type="stuff", prompt=PROMPT)
-with get_openai_callback() as cb:
-  response = chain.run(input_documents=docs, question=user_question)
-  st.write(response)
+  llm = OpenAI(openai_api_key=OPENAI_API_KEY)
+  chain = load_qa_chain(llm, chain_type="stuff", prompt=PROMPT)
+  with get_openai_callback() as cb:
+    response = chain.run(input_documents=docs, question=user_question)
+    st.write(response)
   
