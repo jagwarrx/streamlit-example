@@ -6,4 +6,4 @@ openai
 pypdf2
 faiss-cpu
 tiktoken
-faiss
+
