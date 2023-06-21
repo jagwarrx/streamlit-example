@@ -52,7 +52,7 @@ if pdf_files is not None:
   embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
   knowledge_base = FAISS.from_texts(chunks, embeddings)
 
-   st.write(knowledge_base)
+  st.write(knowledge_base)
 
   # show user input
   if user_question:
