@@ -21,8 +21,6 @@ if pdf_files is not None:
   for page in pdf_reader.pages:
     text += page.extract_text()
 
-  
-
   # split into chunks
   text_splitter = CharacterTextSplitter(
     separator="\n",
@@ -32,12 +30,7 @@ if pdf_files is not None:
   )
   chunks = text_splitter.split_text(text)
 
-  prompt_template = """
-
-  One sided indemnification agreements are where the Supplier shall bear full responsibility for indemnifying the Customer against any losses or damages caused by the Supplier's unauthorized use, disclosure, or misappropriation of the Customer's confidential information. 
-  Two sided indemnification agreements are where the Customer and Supplier mutually agree to indemnify and defend each other against any claims, damages, liabilities, losses, costs, and expenses arising out of third-party intellectual property infringement claims related to their respective products, services, or deliverables provided under this Agreement.
-  
-  
+  prompt_template = """  
   {context}
   
   Question: {question}
