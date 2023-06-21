@@ -31,7 +31,7 @@ if pdf_files is not None:
   chunks = text_splitter.split_text(text)
 
   prompt_template = """  
-  {context}
+  Context: {context}
   
   Question: {question}
   Answer:"""
@@ -39,8 +39,8 @@ if pdf_files is not None:
       template=prompt_template, input_variables=["context","question"]
   )
 
-  user_question = "Using the following information, identify if the document is a one sided or two sided indemnification agreement. Provide examples of clauses from the below to justify your answer."
-
+  user_question = "Identify if the document one-sided or a mutual indemnification agreement? Provide examples of clauses to justify your answer."
+  user_context = "Indemnity clauses may be structured as mutual indemnification, where both parties agree to indemnify each other for specific types of losses, or they may be one-sided, where only one party agrees to indemnify the other."
   # create embeddings
   embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
   knowledge_base = FAISS.from_texts(chunks, embeddings)
@@ -54,6 +54,6 @@ if pdf_files is not None:
   llm = OpenAI(openai_api_key=OPENAI_API_KEY)
   chain = load_qa_chain(llm, chain_type="stuff", prompt=PROMPT)
   with get_openai_callback() as cb:
-    response = chain.run(input_documents=docs, question=user_question)
+    response = chain.run(input_documents=docs, question=user_question, context=user_context)
     st.write(response)
   
