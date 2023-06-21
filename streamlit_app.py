@@ -29,6 +29,8 @@ if pdf_files is not None:
     length_function=len
   )
   chunks = text_splitter.split_text(text)
+  chunks = text_splitter.split_text(text)
+  filtered_chunks = [chunk for chunk in chunks if "indemnification" in chunk.lower() or "indemnify" in chunk.lower()]
 
   prompt_template = """  
   Context: {context}
@@ -43,7 +45,7 @@ if pdf_files is not None:
   user_context = "Indemnity clauses may be structured as mutual indemnification, where both parties agree to indemnify each other for specific types of losses, or they may be one-sided, where only one party agrees to indemnify the other."
   # create embeddings
   embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
-  knowledge_base = FAISS.from_texts(chunks, embeddings)
+  knowledge_base = FAISS.from_texts(filtered_chunks, embeddings)
 
   # show user input
   if user_question:
