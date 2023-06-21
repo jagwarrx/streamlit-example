@@ -52,12 +52,12 @@ if pdf_files is not None:
   embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
   knowledge_base = FAISS.from_texts(chunks, embeddings)
 
-  st.write(knowledge_base)
-
   # show user input
   if user_question:
     docs = knowledge_base.similarity_search(user_question)
-
+  
+  st.write(docs)
+  
   llm = OpenAI(openai_api_key=OPENAI_API_KEY)
   chain = load_qa_chain(llm, chain_type="stuff", prompt=PROMPT)
   with get_openai_callback() as cb:
