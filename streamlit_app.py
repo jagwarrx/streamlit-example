@@ -34,10 +34,9 @@ if pdf_files is not None:
 
   prompt_template = """
 
-  From the document below, identify if the document is a one sided or two sided indemnification agreement. For context, one sided indemnification agreements are where the Supplier shall bear full responsibility for indemnifying the Customer against any losses or damages caused by the Supplier's unauthorized use, disclosure, or misappropriation of the Customer's confidential information. 
+  One sided indemnification agreements are where the Supplier shall bear full responsibility for indemnifying the Customer against any losses or damages caused by the Supplier's unauthorized use, disclosure, or misappropriation of the Customer's confidential information. 
   Two sided indemnification agreements are where the Customer and Supplier mutually agree to indemnify and defend each other against any claims, damages, liabilities, losses, costs, and expenses arising out of third-party intellectual property infringement claims related to their respective products, services, or deliverables provided under this Agreement.
-
-  Document is as follows:
+  Using the following clauses, identify if the document is a one sided or two sided indemnification agreement:
   
   {context}
   
