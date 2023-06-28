@@ -42,7 +42,7 @@ if pdf_files is not None:
   )
 
   user_question = "Identify if the document one-sided or a mutual indemnification agreement? Provide examples of clauses to justify your answer."
-  user_context = "If both parties agree to indemnify each other it is mutual indemnification. If only one party indemnify the other it is one-sided indemnification. If only the Supplier has to indemnify the company, it is one-sided."
+  user_context = "If both parties agree to indemnify each other it is mutual indemnification. If only one party is required to indemnify the other ( example supplier indemnifies company, even if company has to notify the supplier) it is one-sided indemnification."
   # create embeddings
   embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
   knowledge_base = FAISS.from_texts(filtered_chunks, embeddings)
