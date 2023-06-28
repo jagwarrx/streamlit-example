@@ -62,6 +62,7 @@ if pdf_files is not None:
 hide_streamlit_style = """
             <style>
             #MainMenu {visibility: hidden;}
+            header {visibility: hidden;}
             footer {visibility: hidden;}
             </style>
             """
