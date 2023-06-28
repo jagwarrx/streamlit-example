@@ -11,9 +11,13 @@ from langchain.callbacks import get_openai_callback
 from langchain.prompts import PromptTemplate
 import streamlit as st
 
-OPENAI_API_KEY = st.text_input("API Key:")
+OPENAI_API_KEY = "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"
+st.header(":orange[qBotica] Indemnity Identification")
+
 pdf_files = st.file_uploader("Upload pdf files", type=["pdf"],
                                accept_multiple_files=False)
+
+
 
 if pdf_files is not None:
   pdf_reader = PdfReader(pdf_files)
