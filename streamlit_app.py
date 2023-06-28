@@ -41,8 +41,8 @@ if pdf_files is not None:
       template=prompt_template, input_variables=["context","question"]
   )
 
-  user_question = "Identify if the document is a one-sided indemnification or a mutual indemnification agreement?"
-  user_context = "If both parties agree to indemnify each other it is mutual indemnification. If only one party is required to indemnify the other ( example supplier indemnifies company, even if company has to notify the supplier) it is one-sided indemnification.  Provide examples of clauses to justify your answer."
+  user_question = "Identify if the document is a one-sided indemnification or a mutual indemnification agreement? Provide examples from the text to justify your answer."
+  user_context = "Start your answer with Hey! If both parties agree to indemnify each other it is mutual indemnification. If only one party is required to indemnify the other ( example supplier indemnifies company, even if company has to notify the supplier) it is one-sided indemnification.  Provide examples of clauses to justify your answer."
   # create embeddings
   embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
   knowledge_base = FAISS.from_texts(filtered_chunks, embeddings)
