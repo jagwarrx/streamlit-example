@@ -59,3 +59,10 @@ if pdf_files is not None:
     response = chain.run(input_documents=docs, question=user_question, context=user_context)
     st.write(response)
   
+hide_streamlit_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            </style>
+            """
+st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
